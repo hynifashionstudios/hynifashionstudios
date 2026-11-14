@@ -17,7 +17,7 @@ Node.js + Express + MongoDB Community starter backend for the existing React/Vit
 ## Vercel deployment
 - Set the Vercel project's Root Directory to `backend`.
 - Use `npm run build` as the Build Command.
-- Add `MONGODB_URI`, `JWT_SECRET`, and `CLIENT_URL` as Vercel environment variables. Set `CLIENT_URL` to the deployed frontend URL.
+- Add `MONGODB_URI` and `JWT_SECRET` as backend Vercel environment variables. Set `CLIENT_URL` to `https://hynifashionstudios.vercel.app`.
 - Deploy the project; `index.js` exports the Express app for Vercel, and database connections are established when requests arrive.
 
 ## Expected health response

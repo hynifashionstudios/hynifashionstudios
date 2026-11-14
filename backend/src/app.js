@@ -32,13 +32,17 @@ import dashboardRoutes from './routes/dashboard.routes.js';
 import attendanceRoutes from './routes/attendance.routes.js';
 import newsletterRoutes from './routes/newsletter.routes.js';
 const app = express();
+const allowedOrigins = [
+  ...env.clientUrl.split(',').map(origin => origin.trim()).filter(Boolean),
+  'https://hynifashionstudios.vercel.app'
+];
 
 app.disable('x-powered-by');
 
 app.use(helmet());
 
 app.use(cors({
-  origin: env.clientUrl,
+  origin: allowedOrigins,
   credentials: true
 }));
 
