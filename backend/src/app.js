@@ -4,6 +4,7 @@ import helmet from 'helmet';
 import morgan from 'morgan';
 
 import { env } from './config/env.js';
+import { connectDB } from './config/db.js';
 
 import healthRoutes from './routes/health.routes.js';
 import authRoutes from './routes/auth.routes.js';
@@ -57,6 +58,16 @@ app.get('/', (req, res) => {
     message: 'Welcome to Hyni Fashion Studio API',
     health: '/api/health'
   });
+});
+
+app.use(async (req, res, next) => {
+  try {
+    await connectDB();
+    next();
+  } catch (error) {
+    error.statusCode = 503;
+    next(error);
+  }
 });
 
 // HEALTH API

@@ -8,17 +8,23 @@ Node.js + Express + MongoDB Community starter backend for the existing React/Vit
 - npm
 
 ## Setup
-1. Copy this `backend` folder into the root of the extracted `hyni-fashion-studio` frontend project.
-2. Open a terminal in the `backend` folder.
-3. Install dependencies: `npm install`
-4. Check `.env` and make sure the MongoDB URI is `mongodb://127.0.0.1:27017/hyni_fashion_studio`.
-5. Start the development server: `npm run dev`
-6. Open `http://localhost:5000/api/health`.
+1. Open a terminal in the `backend` folder.
+2. Install dependencies: `npm install`
+3. Configure `.env` with `MONGODB_URI` and a `JWT_SECRET` containing at least 32 characters.
+4. Start the development server: `npm run dev`
+5. Open `http://localhost:5000/api/health`.
+
+## Vercel deployment
+- Set the Vercel project's Root Directory to `backend`.
+- Use `npm run build` as the Build Command.
+- Add `MONGODB_URI`, `JWT_SECRET`, and `CLIENT_URL` as Vercel environment variables. Set `CLIENT_URL` to the deployed frontend URL.
+- Deploy the project; `index.js` exports the Express app for Vercel, and database connections are established when requests arrive.
 
 ## Expected health response
 When MongoDB is running, the endpoint returns HTTP 200 and JSON with `success: true`, `api: healthy`, and `database: connected`.
 
 ## Scripts
+- `npm run build` – validate the Vercel function entry point
 - `npm run dev` – start with nodemon
 - `npm start` – start normally
 

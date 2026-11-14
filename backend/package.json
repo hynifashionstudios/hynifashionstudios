@@ -6,6 +6,7 @@
   "description": "Node.js and MongoDB backend for Hyni Fashion Studio",
   "main": "src/server.js",
   "scripts": {
+    "build": "node --check index.js",
     "dev": "nodemon src/server.js",
     "start": "node src/server.js",
     "seed:admin": "node src/seeders/createAdmin.js",
