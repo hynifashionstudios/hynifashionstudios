@@ -21,7 +21,7 @@ import addressRoutes from './routes/address.routes.js';
 import cartRoutes from './routes/cart.routes.js';
 import wishlistRoutes from './routes/wishlist.routes.js';
 import wholesaleRoutes from './routes/wholesale.routes.js';
-import upiTestRoutes from './routes/upiTest.routes.js';
+
 import checkoutRoutes from './routes/checkout.routes.js';
 import paymentRoutes from './routes/payment.routes.js';
 import orderRoutes from './routes/order.routes.js';
@@ -99,7 +99,7 @@ app.use('/api/customer/profile', customerRoutes);
 app.use('/api/wholesale', wholesaleRoutes);
 // ERROR HANDLING
 // UPI PAYMENT TEST API (TEMPORARY)
-// app.use('/api/upi', upiTestRoutes);
+
 // WHOLESALE ROUTES
 // app.use('/api/wholesale', wholesaleRoutes);
 
@@ -107,7 +107,7 @@ app.use('/api/wholesale', wholesaleRoutes);
 app.use('/api/checkout', checkoutRoutes);
 
 // UPI PAYMENT TEST ROUTES
-app.use('/api/upi', upiTestRoutes);
+
 // PAYMENT SUBMISSION AND ADMIN VERIFICATION
 app.use('/api/payments', paymentRoutes);
 app.use('/api/orders', orderRoutes);

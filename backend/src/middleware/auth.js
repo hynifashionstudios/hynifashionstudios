@@ -71,16 +71,9 @@ export async function protect(req, res, next) {
 // }
 
 
+
 export function authorize(...allowedRoles) {
   return (req, res, next) => {
-
-    console.log('--- AUTHORIZATION DEBUG ---');
-    console.log('Request URL:', req.originalUrl);
-    console.log('User Role:', req.user?.role);
-    console.log('Allowed Roles:', allowedRoles);
-    console.log('User Status:', req.user?.status);
-    console.log('---------------------------');
-
     if (!req.user) {
       return res.status(401).json({
         success: false,
