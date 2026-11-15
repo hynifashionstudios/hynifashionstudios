@@ -65,7 +65,14 @@ export default function Header() {
   return (
     <>
       <div className="announcement">
-        A LITTLE LOVE, A LOT OF STYLE <span>✦</span> NEW SEASON COLLECTION NOW LIVE
+        <div className="announcement-track">
+          <div className="announcement-message">
+            A LITTLE LOVE, A LOT OF STYLE <span aria-hidden="true">✦</span> NEW SEASON COLLECTION NOW LIVE
+          </div>
+          <div className="announcement-message" aria-hidden="true">
+            A LITTLE LOVE, A LOT OF STYLE <span>✦</span> NEW SEASON COLLECTION NOW LIVE
+          </div>
+        </div>
       </div>
       <header className="site-header">
         <Link

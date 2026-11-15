@@ -5,11 +5,14 @@ import { env } from '../config/env.js';
 
 export async function protect(req, res, next) {
   try {
-    const header = req.headers.authorization || '';
+    const header = typeof req.headers.authorization === 'string'
+      ? req.headers.authorization.trim()
+      : '';
 
-    const [scheme, token] = header.split(' ');
+    const parts = header.split(/\s+/);
+    const [scheme, token] = parts;
 
-    if (scheme !== 'Bearer' || !token) {
+    if (parts.length !== 2 || scheme.toLowerCase() !== 'bearer' || !token) {
       return res.status(401).json({
         success: false,
         message: 'Authentication required. Send a Bearer token.'
@@ -20,6 +23,13 @@ export async function protect(req, res, next) {
       token,
       env.jwtSecret
     );
+
+    if (!payload || typeof payload !== 'object' || !payload.sub) {
+      return res.status(401).json({
+        success: false,
+        message: 'Invalid or expired token. Please log in again.'
+      });
+    }
 
     const user = await User.findById(payload.sub);
 
@@ -36,8 +46,10 @@ export async function protect(req, res, next) {
 
   } catch (error) {
     if (
-      error.name === 'TokenExpiredError' ||
-      error.name === 'JsonWebTokenError'
+      error && (
+        error.name === 'TokenExpiredError' ||
+        error.name === 'JsonWebTokenError'
+      )
     ) {
       return res.status(401).json({
         success: false,

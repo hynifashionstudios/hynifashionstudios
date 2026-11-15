@@ -14,11 +14,22 @@ export default function Chatbot() {
   const [error, setError] = useState("");
   const [trackPath, setTrackPath] = useState("");
   const [supportMobile, setSupportMobile] = useState("");
+  const [userMessage, setUserMessage] = useState("");
   const { user } = useStore();
+  const canUseChatbot =
+    user && ["customer", "wholesale"].includes(user.apiRole);
   const addBot = (text) =>
     setMessages((old) => [...old, { from: "bot", text }]);
   const addUser = (text) =>
     setMessages((old) => [...old, { from: "user", text }]);
+  const submitMessage = (e) => {
+    e.preventDefault();
+    const text = userMessage.trim();
+    if (!text) return;
+    addUser(text);
+    addBot("Please sign in to use this bot.");
+    setUserMessage("");
+  };
   const call = async (path, userText) => {
     setBusy(true);
     setError("");
@@ -52,8 +63,7 @@ Tracking: ${result.order.trackingId || "Not available yet"}`);
   };
   useEffect(() => {
     if (open && messages.length === 0) {
-      if (user && ["customer", "wholesale"].includes(user.apiRole))
-        call("/start");
+      if (canUseChatbot) call("/start");
       else
         addBot(
           "Hi! How are you? How may I help you? Please sign in to view your personal order details.",
@@ -118,8 +128,7 @@ Tracking: ${result.order.trackingId || "Not available yet"}`);
               </p>
             ))}
             {step === "start" &&
-              user &&
-              ["customer", "wholesale"].includes(user.apiRole) && (
+              canUseChatbot && (
                 <div className="quick-questions">
                   <button
                     disabled={busy}
@@ -170,25 +179,43 @@ Tracking: ${result.order.trackingId || "Not available yet"}`);
             )}
             {error && <small role="alert">{error}</small>}
           </div>
-          <form
-            onSubmit={(e) => {
-              e.preventDefault();
-              choose("others");
-            }}
-          >
-            <input
-              placeholder="Choose an option above"
-              aria-label="Chat help"
-              disabled
-            />
-            <button
-              type="button"
-              onClick={() => setOpen(false)}
-              aria-label="Close"
+          {canUseChatbot ? (
+            <form
+              onSubmit={(e) => {
+                e.preventDefault();
+                choose("others");
+              }}
             >
-              <X size={16} />
-            </button>
-          </form>
+              <input
+                placeholder="Choose an option above"
+                aria-label="Chat help"
+                disabled
+              />
+              <button
+                type="button"
+                onClick={() => setOpen(false)}
+                aria-label="Close"
+              >
+                <X size={16} />
+              </button>
+            </form>
+          ) : (
+            <form onSubmit={submitMessage}>
+              <input
+                value={userMessage}
+                onChange={(e) => setUserMessage(e.target.value)}
+                placeholder="Type your message..."
+                aria-label="Message to Hyni"
+              />
+              <button
+                type="submit"
+                disabled={!userMessage.trim()}
+                aria-label="Send message"
+              >
+                <Send size={16} />
+              </button>
+            </form>
+          )}
           <a
             className="chat-instagram"
             href={BRAND.instagram}

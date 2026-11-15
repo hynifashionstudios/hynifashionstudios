@@ -34,6 +34,7 @@ import newsletterRoutes from './routes/newsletter.routes.js';
 const app = express();
 const allowedOrigins = [
   ...env.clientUrl.split(',').map(origin => origin.trim()).filter(Boolean),
+  ...(env.nodeEnv === 'development' ? ['http://localhost:5173'] : []),
   'https://hynifashionstudios.vercel.app'
 ];
 

@@ -2517,7 +2517,9 @@ export default function App() {
         <Route path="*" element={<NotFound />} />
       </Routes>
       {!isEmployeeRoute && <Footer />}
-      {!isChatbotHidden && <Chatbot />}
+      {!isChatbotHidden && (
+        <Chatbot key={`${user?.id || "guest"}:${user?.apiRole || "guest"}`} />
+      )}
     </>
   );
 }

@@ -277,6 +277,34 @@ td small,
   font-size: 10px;
   letter-spacing: 1.8px;
   font-weight: 600;
+  justify-content: flex-start;
+  overflow: hidden;
+  padding: 0;
+  text-align: left;
+}
+
+.announcement-track {
+  display: flex;
+  flex: 0 0 auto;
+  width: max-content;
+  animation: announcement-scroll 28s linear infinite;
+}
+
+.announcement-message {
+  flex: 0 0 auto;
+  margin: 0;
+  padding-right: 4rem;
+  white-space: nowrap;
+}
+
+.announcement:hover .announcement-track {
+  animation-play-state: paused;
+}
+
+@keyframes announcement-scroll {
+  to {
+    transform: translateX(-50%);
+  }
 }
 
 .site-header {
@@ -2323,8 +2351,8 @@ td small {
     height: 30px;
     font-size: 8px;
     letter-spacing: 1.1px;
-    padding-inline: 12px;
-    text-align: center;
+    padding: 0;
+    text-align: left;
   }
 
   .site-header {
@@ -2798,6 +2826,24 @@ td small {
 /* Motion preferences                                               */
 /* ---------------------------------------------------------------- */
 @media (prefers-reduced-motion: reduce) {
+  .announcement-track {
+    width: 100%;
+    justify-content: center;
+    animation: none;
+  }
+
+  .announcement-message {
+    display: none;
+  }
+
+  .announcement-message:first-child {
+    display: block;
+    overflow: hidden;
+    padding: 0 12px;
+    text-align: center;
+    text-overflow: ellipsis;
+  }
+
   .product-card,
   .product-card:hover,
   .product-image img,
