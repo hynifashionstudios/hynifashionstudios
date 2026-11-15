@@ -99,9 +99,9 @@ app.use('/api/customer/profile', customerRoutes);
 app.use('/api/wholesale', wholesaleRoutes);
 // ERROR HANDLING
 // UPI PAYMENT TEST API (TEMPORARY)
-app.use('/api/upi', upiTestRoutes);
+// app.use('/api/upi', upiTestRoutes);
 // WHOLESALE ROUTES
-app.use('/api/wholesale', wholesaleRoutes);
+// app.use('/api/wholesale', wholesaleRoutes);
 
 // CHECKOUT ROUTES
 app.use('/api/checkout', checkoutRoutes);

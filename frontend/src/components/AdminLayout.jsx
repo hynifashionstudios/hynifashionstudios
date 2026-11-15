@@ -94,7 +94,11 @@ export default function AdminLayout({ children, title }) {
           <Link to="/" onClick={() => setMenuOpen(false)}>
             <ArrowUpRight size={16} /> View storefront
           </Link>
-          <button onClick={() => { logout(); window.location.href = '/login'; }}>
+          {/* <button onClick={() => { logout(); window.location.href = '/login'; }}> */}
+          <button onClick={() => {
+  logout();
+  navigate('/login', { replace: true });
+}}>
             <LogOut size={16} /> Sign out
           </button>
         </div>

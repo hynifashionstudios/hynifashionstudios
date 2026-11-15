@@ -1283,6 +1283,7 @@ function Profile() {
   const [addressForm, setAddressForm] = useState({ label: "Home", fullName: "", mobile: "", addressLine1: "", addressLine2: "", landmark: "", city: "", state: "", pincode: "", country: "India" });
   const [addressMessage, setAddressMessage] = useState("");
   const [addressError, setAddressError] = useState("");
+  const navigate = useNavigate();
   if (!user) return <Navigate to="/login" />;
 
   const saveProfile = async (event) => {
@@ -1377,7 +1378,10 @@ function Profile() {
           </form>
           <button
             className="button outline"
-            onClick={() => { logout(); window.location.href = "/"; }}
+            onClick={() => {
+  logout();
+  navigate("/", { replace: true });
+}}
           >
             Sign out <LogOut size={16} />
           </button>

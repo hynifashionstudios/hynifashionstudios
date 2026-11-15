@@ -1,0 +1,61 @@
+
+{
+  "rewrites": [
+    {
+      "source": "/login",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/register",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/admin",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/admin/:path*",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/employee/:path*",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/profile",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/customer/:path*",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/customer",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/wholesale/:path*",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/wholesale",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/wishlist",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/cart",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/checkout",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/track-order/:path*",
+      "destination": "/index.html"
+    }
+  ]
+}
